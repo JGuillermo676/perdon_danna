@@ -4,6 +4,16 @@
 <meta charset="UTF-8">
 <title>🚨 Sistema de perdón</title>
 
+<!-- 📊 GOOGLE ANALYTICS -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8XWZYW36YF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+
+  gtag('js', new Date());
+  gtag('config', 'G-8XWZYW36YF');
+</script>
+
 <style>
 body{
 margin:0;
@@ -65,94 +75,81 @@ background:#111;
 
 <body>
 
-<!-- VISITA PERSONAL -->
+<!-- 👤 MENSAJE VISITA -->
 <p id="mensajeVisita"></p>
 
-<!-- CONTADOR GLOBAL -->
+<!-- 🌍 CONTADOR GLOBAL -->
 <h4 id="contadorGlobal">Cargando visitas...</h4>
 
-<!-- PANTALLA 1 -->
+<!-- P1 -->
 <div id="p1" class="pantalla activa">
 <h1>🚨 ERROR DETECTADO 🚨</h1>
 <p>Se ha encontrado un fallo en el sistema...</p>
-
 <button onclick="cambiar('p2')">Analizar problema</button>
 </div>
 
-<!-- PANTALLA 2 -->
+<!-- P2 -->
 <div id="p2" class="pantalla">
 <h1>Diagnóstico completado</h1>
-
 <div class="card">
 <p><b>Responsable:</b> Guillermo 🙋‍♂️</p>
 <p><b>Problema:</b> Hizo enfadar a Danna ❤️</p>
 <p><b>Nivel:</b> CRÍTICO ⚠️</p>
 </div>
-
 <button onclick="cambiar('p3')">Ver solución</button>
 </div>
 
-<!-- PANTALLA 3 -->
+<!-- P3 -->
 <div id="p3" class="pantalla">
 <h1>🔧 Solución encontrada</h1>
-
 <div class="card">
 <p>💋 Besos infinitos</p>
 <p>🤗 Abrazos ilimitados</p>
 <p>❤️ Mimos premium</p>
 <p>🥺 Perdón infinito</p>
 </div>
-
 <button onclick="cambiar('p4')">Continuar</button>
 </div>
 
-<!-- PANTALLA 4 -->
+<!-- P4 -->
 <div id="p4" class="pantalla">
 <h1>¿Perdonar al novio tonto? 🥺</h1>
-
 <button onclick="final()">Sí ❤️</button>
 <button id="noBtn">No 😈</button>
 </div>
 
-<!-- PANTALLA 5 -->
+<!-- P5 -->
 <div id="p5" class="pantalla">
 <h1>❤️ PARCHE INSTALADO ❤️</h1>
 <h2>Novio salvado correctamente</h2>
-<p>Te quiero y amo muchísimo mi Novia Danna 🥺❤️</p>
+<p>Te quiero muchísimo Danna 🥺❤️</p>
 </div>
 
-<!-- PANEL ADMIN -->
+<!-- 🔐 ADMIN -->
 <div id="adminPanel" class="pantalla">
 <h1>🔐 Panel Secreto</h1>
-
 <div class="card">
 <p id="adminData">Cargando...</p>
 </div>
-
 <button onclick="cerrarAdmin()">Cerrar</button>
 </div>
 
 <script>
 
-/* CAMBIO DE PANTALLA */
+/* CAMBIO PANTALLA */
 function cambiar(id){
 document.querySelectorAll('.pantalla')
 .forEach(p=>p.classList.remove('activa'));
-
-document.getElementById(id)
-.classList.add('activa');
+document.getElementById(id).classList.add('activa');
 }
 
 /* BOTÓN NO ESCAPA */
 const noBtn=document.getElementById("noBtn");
 
 noBtn.addEventListener("mouseover",()=>{
-
 let x=Math.random()*400-200;
 let y=Math.random()*200-100;
-
 noBtn.style.transform=`translate(${x}px,${y}px)`;
-
 });
 
 /* FINAL */
@@ -167,6 +164,9 @@ c.style.left=Math.random()*100+"vw";
 c.style.animationDuration=(Math.random()*3+2)+"s";
 document.body.appendChild(c);
 }
+
+/* evento analytics */
+gtag('event','perdon_aceptado');
 }
 
 /* 👤 VISITAS LOCALES */
@@ -174,21 +174,19 @@ let visitas = localStorage.getItem("visitas") || 0;
 visitas++;
 localStorage.setItem("visitas", visitas);
 
-/* MENSAJES PERSONALIZADOS */
 const mensajes = [
-"Primera visita... sistema detectando presencia 😳",
-"Segunda visita... esto empieza a gustarte 👀",
-"Tercera vez... te estás acostumbrando ❤️",
-"Cuarta visita... esto ya es cariño 😏",
-"Más de 4 visitas... amor detectado ❤️🔥"
+"Primera visita... sistema activado 😳",
+"Segunda visita... interesante 👀",
+"Tercera vez... ya te gusta esto ❤️",
+"Cuarta visita... sospechoso 😏",
+"Más de 4... amor detectado ❤️🔥"
 ];
 
 let msg = visitas > mensajes.length
 ? mensajes[mensajes.length-1]
 : mensajes[visitas-1];
 
-document.getElementById("mensajeVisita").innerText =
-"🔎 " + msg;
+document.getElementById("mensajeVisita").innerText = msg;
 
 /* 🌍 CONTADOR GLOBAL */
 fetch("https://api.countapi.xyz/hit/sistema-perdon-danna/visitas")
@@ -200,8 +198,8 @@ document.getElementById("contadorGlobal").innerText =
 window.visitasGlobal = data.value;
 });
 
-/* 🔐 ADMIN SECRETO */
-document.addEventListener("keydown", function(e){
+/* 🔐 ADMIN */
+document.addEventListener("keydown",function(e){
 
 if(e.ctrlKey && e.shiftKey && e.key==="A"){
 
@@ -213,6 +211,8 @@ cambiar("adminPanel");
 
 document.getElementById("adminData").innerText =
 "💌 Visitas globales: " + window.visitasGlobal;
+
+gtag('event','admin_abierto');
 
 }else{
 alert("❌ Acceso denegado");
