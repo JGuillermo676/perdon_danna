@@ -4,14 +4,18 @@
 <meta charset="UTF-8">
 <title>🚨 Sistema de perdón</title>
 
-<!-- 📊 GOOGLE ANALYTICS -->
+<!-- 📊 GOOGLE ANALYTICS (CORRECTO) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8XWZYW36YF"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
 
   gtag('js', new Date());
-  gtag('config', 'G-8XWZYW36YF');
+
+  // 🔥 IMPORTANTE: esto activa la recogida de datos
+  gtag('config', 'G-8XWZYW36YF', {
+    send_page_view: true
+  });
 </script>
 
 <style>
@@ -165,7 +169,6 @@ c.style.animationDuration=(Math.random()*3+2)+"s";
 document.body.appendChild(c);
 }
 
-/* evento analytics */
 gtag('event','perdon_aceptado');
 }
 
