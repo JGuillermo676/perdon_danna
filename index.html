@@ -2,12 +2,9 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
 <title>🚨 Sistema de perdón</title>
 
 <style>
-
 body{
 margin:0;
 font-family:Arial;
@@ -15,86 +12,65 @@ background:linear-gradient(135deg,#ff6b8a,#ff3d68);
 color:white;
 text-align:center;
 overflow:hidden;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
 }
 
 /* pantallas */
 .pantalla{
 display:none;
-padding:20px;
-width:100%;
-max-width:500px;
+padding-top:120px;
 }
 
 .activa{
 display:block;
 }
 
-/* textos */
-h1{
-font-size:28px;
-}
-
-p{
-font-size:18px;
-}
-
-/* botones estilo móvil */
+/* botones */
 button{
-padding:16px 22px;
+padding:15px 25px;
 font-size:18px;
 border:none;
 border-radius:30px;
 cursor:pointer;
 margin:10px;
-width:80%;
-max-width:280px;
 }
 
-/* tarjeta */
+/* tarjetas */
 .card{
 background:white;
 color:black;
 padding:20px;
 border-radius:20px;
-margin:20px auto;
-}
-
-/* pantalla final */
-#p5 h1{
-font-size:30px;
+width:300px;
+margin:auto;
 }
 
 /* corazones */
 .corazon{
 position:absolute;
-font-size:24px;
+font-size:25px;
 animation:caer 4s linear forwards;
 }
 
 @keyframes caer{
 0%{transform:translateY(-100px);}
-100%{transform:translateY(110vh);opacity:0;}
+100%{transform:translateY(100vh);opacity:0;}
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- P1 -->
+<!-- PANTALLA 1 -->
 <div id="p1" class="pantalla activa">
 <h1>🚨 ERROR DETECTADO 🚨</h1>
 <p>Se ha encontrado un fallo en el sistema...</p>
+
 <button onclick="cambiar('p2')">Analizar problema</button>
 </div>
 
-<!-- P2 -->
+<!-- PANTALLA 2 -->
 <div id="p2" class="pantalla">
-<h1>Diagnóstico</h1>
+<h1>Diagnóstico completado</h1>
 
 <div class="card">
 <p><b>Responsable:</b> Guillermo 🙋‍♂️</p>
@@ -105,9 +81,9 @@ animation:caer 4s linear forwards;
 <button onclick="cambiar('p3')">Ver solución</button>
 </div>
 
-<!-- P3 -->
+<!-- PANTALLA 3 -->
 <div id="p3" class="pantalla">
-<h1>🔧 Solución</h1>
+<h1>🔧 Solución encontrada</h1>
 
 <div class="card">
 <p>💋 Besos infinitos</p>
@@ -119,19 +95,19 @@ animation:caer 4s linear forwards;
 <button onclick="cambiar('p4')">Continuar</button>
 </div>
 
-<!-- P4 -->
+<!-- PANTALLA 4 -->
 <div id="p4" class="pantalla">
-<h1>¿Perdonar al novio tonto? 🥺</h1>
+<h1>¿Perdonar al novio? 🥺</h1>
 
 <button onclick="final()">Sí ❤️</button>
 <button id="noBtn">No 😈</button>
 </div>
 
-<!-- P5 -->
+<!-- PANTALLA 5 -->
 <div id="p5" class="pantalla">
 <h1>❤️ PARCHE INSTALADO ❤️</h1>
 <h2>Novio salvado correctamente</h2>
-<p>Te quiero y amo muchísimo mi Danna 🥺❤️</p>
+<p>Te quiero muchísimo Danna 🥺❤️</p>
 </div>
 
 <script>
@@ -144,20 +120,23 @@ document.getElementById(id)
 .classList.add('activa');
 }
 
-/* botón esquivo */
+/* botón que huye */
 const noBtn=document.getElementById("noBtn");
 
 noBtn.addEventListener("mouseover",()=>{
-let x=Math.random()*200-100;
+
+let x=Math.random()*400-200;
 let y=Math.random()*200-100;
+
 noBtn.style.transform=`translate(${x}px,${y}px)`;
+
 });
 
-/* final */
+/* final con corazones */
 function final(){
 cambiar('p5');
 
-for(let i=0;i<50;i++){
+for(let i=0;i<60;i++){
 let c=document.createElement("div");
 c.className="corazon";
 c.innerHTML="❤️";
