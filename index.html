@@ -4,18 +4,14 @@
 <meta charset="UTF-8">
 <title>🚨 Sistema de perdón</title>
 
-<!-- 📊 GOOGLE ANALYTICS (CORRECTO) -->
+<!-- 📊 GOOGLE ANALYTICS (OFICIAL - NO MODIFICAR) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8XWZYW36YF"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-
   gtag('js', new Date());
 
-  // 🔥 IMPORTANTE: esto activa la recogida de datos
-  gtag('config', 'G-8XWZYW36YF', {
-    send_page_view: true
-  });
+  gtag('config', 'G-8XWZYW36YF');
 </script>
 
 <style>
@@ -140,7 +136,7 @@ background:#111;
 
 <script>
 
-/* CAMBIO PANTALLA */
+/* CAMBIO DE PANTALLA */
 function cambiar(id){
 document.querySelectorAll('.pantalla')
 .forEach(p=>p.classList.remove('activa'));
@@ -168,8 +164,6 @@ c.style.left=Math.random()*100+"vw";
 c.style.animationDuration=(Math.random()*3+2)+"s";
 document.body.appendChild(c);
 }
-
-gtag('event','perdon_aceptado');
 }
 
 /* 👤 VISITAS LOCALES */
@@ -214,8 +208,6 @@ cambiar("adminPanel");
 
 document.getElementById("adminData").innerText =
 "💌 Visitas globales: " + window.visitasGlobal;
-
-gtag('event','admin_abierto');
 
 }else{
 alert("❌ Acceso denegado");
