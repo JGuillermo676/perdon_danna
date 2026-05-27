@@ -55,10 +55,21 @@ animation:caer 4s linear forwards;
 0%{transform:translateY(-100px);}
 100%{transform:translateY(100vh);opacity:0;}
 }
+
+/* admin */
+#adminPanel{
+background:#111;
+}
 </style>
 </head>
 
 <body>
+
+<!-- VISITA PERSONAL -->
+<p id="mensajeVisita"></p>
+
+<!-- CONTADOR GLOBAL -->
+<h4 id="contadorGlobal">Cargando visitas...</h4>
 
 <!-- PANTALLA 1 -->
 <div id="p1" class="pantalla activa">
@@ -110,8 +121,20 @@ animation:caer 4s linear forwards;
 <p>Te quiero y amo muchísimo mi Novia Danna 🥺❤️</p>
 </div>
 
+<!-- PANEL ADMIN -->
+<div id="adminPanel" class="pantalla">
+<h1>🔐 Panel Secreto</h1>
+
+<div class="card">
+<p id="adminData">Cargando...</p>
+</div>
+
+<button onclick="cerrarAdmin()">Cerrar</button>
+</div>
+
 <script>
 
+/* CAMBIO DE PANTALLA */
 function cambiar(id){
 document.querySelectorAll('.pantalla')
 .forEach(p=>p.classList.remove('activa'));
@@ -120,7 +143,7 @@ document.getElementById(id)
 .classList.add('activa');
 }
 
-/* botón que huye */
+/* BOTÓN NO ESCAPA */
 const noBtn=document.getElementById("noBtn");
 
 noBtn.addEventListener("mouseover",()=>{
@@ -132,7 +155,7 @@ noBtn.style.transform=`translate(${x}px,${y}px)`;
 
 });
 
-/* final con corazones */
+/* FINAL */
 function final(){
 cambiar('p5');
 
@@ -144,6 +167,62 @@ c.style.left=Math.random()*100+"vw";
 c.style.animationDuration=(Math.random()*3+2)+"s";
 document.body.appendChild(c);
 }
+}
+
+/* 👤 VISITAS LOCALES */
+let visitas = localStorage.getItem("visitas") || 0;
+visitas++;
+localStorage.setItem("visitas", visitas);
+
+/* MENSAJES PERSONALIZADOS */
+const mensajes = [
+"Primera visita... sistema detectando presencia 😳",
+"Segunda visita... esto empieza a gustarte 👀",
+"Tercera vez... te estás acostumbrando ❤️",
+"Cuarta visita... esto ya es cariño 😏",
+"Más de 4 visitas... amor detectado ❤️🔥"
+];
+
+let msg = visitas > mensajes.length
+? mensajes[mensajes.length-1]
+: mensajes[visitas-1];
+
+document.getElementById("mensajeVisita").innerText =
+"🔎 " + msg;
+
+/* 🌍 CONTADOR GLOBAL */
+fetch("https://api.countapi.xyz/hit/sistema-perdon-danna/visitas")
+.then(res=>res.json())
+.then(data=>{
+document.getElementById("contadorGlobal").innerText =
+"💌 Visitas totales: " + data.value;
+
+window.visitasGlobal = data.value;
+});
+
+/* 🔐 ADMIN SECRETO */
+document.addEventListener("keydown", function(e){
+
+if(e.ctrlKey && e.shiftKey && e.key==="A"){
+
+let pass = prompt("🔐 Contraseña admin:");
+
+if(pass==="danna123"){
+
+cambiar("adminPanel");
+
+document.getElementById("adminData").innerText =
+"💌 Visitas globales: " + window.visitasGlobal;
+
+}else{
+alert("❌ Acceso denegado");
+}
+}
+});
+
+/* CERRAR ADMIN */
+function cerrarAdmin(){
+cambiar("p1");
 }
 
 </script>
