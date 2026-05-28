@@ -1,20 +1,22 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <title>🚨 Sistema de perdón</title>
 
-<!-- 📊 GOOGLE ANALYTICS (OFICIAL - NO MODIFICAR) -->
+<!-- 📊 GOOGLE ANALYTICS -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8XWZYW36YF"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
 
-  gtag('config', 'G-8XWZYW36YF');
+gtag('config', 'G-8XWZYW36YF');
 </script>
 
 <style>
+
 body{
 margin:0;
 font-family:Arial;
@@ -42,6 +44,7 @@ border:none;
 border-radius:30px;
 cursor:pointer;
 margin:10px;
+transition:0.2s;
 }
 
 /* tarjetas */
@@ -59,17 +62,39 @@ margin:auto;
 position:absolute;
 font-size:25px;
 animation:caer 4s linear forwards;
+pointer-events:none;
 }
 
 @keyframes caer{
-0%{transform:translateY(-100px);}
-100%{transform:translateY(100vh);opacity:0;}
+0%{
+transform:translateY(-100px);
+opacity:1;
+}
+100%{
+transform:translateY(100vh);
+opacity:0;
+}
 }
 
 /* admin */
 #adminPanel{
 background:#111;
 }
+
+/* mensaje visitas */
+#mensajeVisita{
+margin-top:20px;
+font-size:18px;
+font-weight:bold;
+padding:0 20px;
+white-space:pre-line;
+}
+
+/* contador */
+#contadorGlobal{
+margin-top:10px;
+}
+
 </style>
 </head>
 
@@ -91,29 +116,34 @@ background:#111;
 <!-- P2 -->
 <div id="p2" class="pantalla">
 <h1>Diagnóstico completado</h1>
+
 <div class="card">
 <p><b>Responsable:</b> Guillermo 🙋‍♂️</p>
 <p><b>Problema:</b> Hizo enfadar a Danna ❤️</p>
 <p><b>Nivel:</b> CRÍTICO ⚠️</p>
 </div>
+
 <button onclick="cambiar('p3')">Ver solución</button>
 </div>
 
 <!-- P3 -->
 <div id="p3" class="pantalla">
 <h1>🔧 Solución encontrada</h1>
+
 <div class="card">
 <p>💋 Besos infinitos</p>
 <p>🤗 Abrazos ilimitados</p>
 <p>❤️ Mimos premium</p>
 <p>🥺 Perdón infinito</p>
 </div>
+
 <button onclick="cambiar('p4')">Continuar</button>
 </div>
 
 <!-- P4 -->
 <div id="p4" class="pantalla">
 <h1>¿Perdonar al novio tonto? 🥺</h1>
+
 <button onclick="final()">Sí ❤️</button>
 <button id="noBtn">No 😈</button>
 </div>
@@ -125,77 +155,160 @@ background:#111;
 <p>Te quiero muchísimo Danna 🥺❤️</p>
 </div>
 
-<!-- 🔐 ADMIN -->
+<!-- 🔐 PANEL ADMIN -->
 <div id="adminPanel" class="pantalla">
 <h1>🔐 Panel Secreto</h1>
+
 <div class="card">
 <p id="adminData">Cargando...</p>
 </div>
+
 <button onclick="cerrarAdmin()">Cerrar</button>
 </div>
 
 <script>
 
-/* CAMBIO DE PANTALLA */
+/* CAMBIO DE PANTALLAS */
 function cambiar(id){
+
 document.querySelectorAll('.pantalla')
 .forEach(p=>p.classList.remove('activa'));
-document.getElementById(id).classList.add('activa');
+
+document.getElementById(id)
+.classList.add('activa');
+
 }
 
 /* BOTÓN NO ESCAPA */
-const noBtn=document.getElementById("noBtn");
+const noBtn = document.getElementById("noBtn");
 
 noBtn.addEventListener("mouseover",()=>{
-let x=Math.random()*400-200;
-let y=Math.random()*200-100;
-noBtn.style.transform=`translate(${x}px,${y}px)`;
+
+let x = Math.random()*400 - 200;
+let y = Math.random()*200 - 100;
+
+noBtn.style.transform = `translate(${x}px,${y}px)`;
+
 });
 
 /* FINAL */
 function final(){
+
 cambiar('p5');
 
 for(let i=0;i<60;i++){
-let c=document.createElement("div");
-c.className="corazon";
-c.innerHTML="❤️";
-c.style.left=Math.random()*100+"vw";
-c.style.animationDuration=(Math.random()*3+2)+"s";
+
+let c = document.createElement("div");
+
+c.className = "corazon";
+c.innerHTML = "❤️";
+
+c.style.left = Math.random()*100 + "vw";
+c.style.animationDuration =
+(Math.random()*3+2)+"s";
+
 document.body.appendChild(c);
+
 }
+
 }
 
 /* 👤 VISITAS LOCALES */
 let visitas = localStorage.getItem("visitas") || 0;
+
 visitas++;
+
 localStorage.setItem("visitas", visitas);
 
+/* 💌 MENSAJES CADA 5 VISITAS */
 const mensajes = [
-"Primera visita... sistema activado 😳",
-"Segunda visita... interesante 👀",
-"Tercera vez... ya te gusta esto ❤️",
-"Cuarta visita... sospechoso 😏",
-"Más de 4... amor detectado ❤️🔥"
+
+"5 visitas... ya estás oficialmente atrapada 😳",
+
+"10 visitas... esto empieza a ser peligroso ❤️",
+
+"15 visitas... el sistema detecta demasiado amor 👀",
+
+"20 visitas... Guillermo agradece tu obsesión 😌",
+
+"25 visitas... nivel de ternura aumentado 💕",
+
+"30 visitas... ya casi eres administradora del sistema 😏",
+
+"35 visitas... el botón de NO sigue sin funcionar 😈",
+
+"40 visitas... análisis completado: estás enamorada ❤️",
+
+"45 visitas... demasiadas visitas para ser casualidad 👀",
+
+"50 visitas... mitad del camino desbloqueada 🎉",
+
+"55 visitas... el novio sigue sobreviviendo 🥺",
+
+"60 visitas... amor detectado en niveles críticos 🚨",
+
+"65 visitas... esta página ya es tu segunda casa 🏠❤️",
+
+"70 visitas... Danna.exe ha vuelto otra vez 😳",
+
+"75 visitas... el sistema ya te reconoce automáticamente 🤖💕",
+
+"80 visitas... imposible dejar de entrar aquí 😭❤️",
+
+"85 visitas... el amor supera todos los bugs 💋",
+
+"90 visitas... alerta máxima de cariño detectada 🚨❤️",
+
+"95 visitas... estamos cerca del secreto final 👀✨",
+
+`💯 100 VISITAS 💯
+❤️ SISTEMA COMPLETAMENTE ENAMORADO ❤️
+Gracias por volver tantas veces...
+Guillermo te quiere muchísimo Danna 🥺💕`
+
 ];
 
-let msg = visitas > mensajes.length
-? mensajes[mensajes.length-1]
-: mensajes[visitas-1];
+/* MOSTRAR MENSAJE */
+let indice = Math.floor(visitas / 5) - 1;
 
-document.getElementById("mensajeVisita").innerText = msg;
+if(indice < 0){
+
+document.getElementById("mensajeVisita")
+.innerText =
+"Primera visita... sistema activado 😳";
+
+}
+else if(indice >= mensajes.length){
+
+document.getElementById("mensajeVisita")
+.innerText =
+mensajes[mensajes.length - 1];
+
+}
+else{
+
+document.getElementById("mensajeVisita")
+.innerText =
+mensajes[indice];
+
+}
 
 /* 🌍 CONTADOR GLOBAL */
 fetch("https://api.countapi.xyz/hit/sistema-perdon-danna/visitas")
+
 .then(res=>res.json())
+
 .then(data=>{
-document.getElementById("contadorGlobal").innerText =
+
+document.getElementById("contadorGlobal")
+.innerText =
 "💌 Visitas totales: " + data.value;
 
 window.visitasGlobal = data.value;
+
 });
 
-/* 🔐 ADMIN */
+/* 🔐 PANEL ADMIN */
 document.addEventListener("keydown",function(e){
 
 if(e.ctrlKey && e.shiftKey && e.key==="A"){
@@ -206,21 +319,29 @@ if(pass==="danna123"){
 
 cambiar("adminPanel");
 
-document.getElementById("adminData").innerText =
+document.getElementById("adminData")
+.innerText =
 "💌 Visitas globales: " + window.visitasGlobal;
 
 }else{
+
 alert("❌ Acceso denegado");
+
 }
+
 }
+
 });
 
 /* CERRAR ADMIN */
 function cerrarAdmin(){
+
 cambiar("p1");
+
 }
 
 </script>
 
 </body>
 </html>
+```
